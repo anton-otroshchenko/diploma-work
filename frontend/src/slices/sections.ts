@@ -29,7 +29,6 @@ const { reducer, actions, name } = createSlice({
             state.sections = action.payload;
         });
         builder.addCase(getSectionsBySiteId.rejected, () => {
-            // state.dataStatus = DataStatus.REJECTED;
         });
     },
 });
