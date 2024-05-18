@@ -1,0 +1,22 @@
+{
+  "name": "diploma-work-root",
+  "version": "1.0.0",
+  "description": "diploma-work",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anton-otroshchenko/diploma-work.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anton-otroshchenko/diploma-work/issues"
+  },
+  "homepage": "https://github.com/anton-otroshchenko/diploma-work#readme",
+  "dependencies": {
+    "typescript": "^5.4.5"
+  }
+}
