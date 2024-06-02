@@ -11,7 +11,10 @@ const {
     DB_PORT,
     DB_CLIENT,
     OPEN_AI_KEY,
-    OPEN_AI_MODEL
+    OPEN_AI_MODEL,
+    AWS_ACCESS_KEY,
+    AWS_BUCKET_NAME,
+    AWS_SECRET_KEY
 } = process.env;
 
 const ENV = {
@@ -31,6 +34,11 @@ const ENV = {
     OPEN_AI: {
         KEY: OPEN_AI_KEY,
         MODEL: OPEN_AI_MODEL,
+    },
+    AWS: {
+        SECRET_KEY: AWS_SECRET_KEY,
+        ACCESS_KEY: AWS_ACCESS_KEY,
+        BUCKET_NAME: AWS_BUCKET_NAME,
     }
 };
 

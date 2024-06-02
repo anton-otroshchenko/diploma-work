@@ -1,8 +1,13 @@
 import {SectionsRepository} from '../repositories/sections.repository';
 import {SectionType, ValueOf} from "../../shared/src";
 import {OpenAI} from "./open-ai";
+import { File } from './file.service';
+import {FileRepository} from "../repositories/file.repository";
+import {FileModel} from "../models/file.model";
 
 const openAI = new OpenAI();
+const fileRepository = new FileRepository(FileModel);
+const file = new File({fileRepository})
 
 class SectionService {
     private sectionsRepository: SectionsRepository;
@@ -77,42 +82,25 @@ class SectionService {
 
         const content = await openAI.createCompletion(prompt);
 
-        console.log(content);
-
         return {
             logo: content['logo'],
-            phone: content['phone'],
+            phone: '+380000000000',
         };
     }
 
     private async createMainContent(prompt: string): Promise<unknown> {
         const content = await openAI.createCompletion(prompt);
-        // const waitTime = 2000;
-        //
-        // let rawImage;
-        //
-        // try {
-        //     rawImage = await openAI.createImage(
-        //         content['imageDescription'] ?? '',
-        //         ImageSize.LARGE,
-        //     );
-        // } catch {
-        //     rawImage = '';
-        // }
-        //
-        // let image;
-        //
-        // if (rawImage) {
-        //     image = await this.file.upload({ file: rawImage });
-        // }
-        //
-        // await new Promise((resolve) => {
-        //     setTimeout(resolve, waitTime);
-        // });
+
+        const image = await openAI.createImage(content['imageDescription']);
+
+        console.log(image)
+
+        const picture = await file.upload({file: image});
 
         return {
             title: content['title'] ?? '',
             description: content['description'] ?? '',
+            image: picture.url ?? ''
         };
     }
 

@@ -1,11 +1,5 @@
 import OpenAi from 'openai';
 
-import {
-    type ChatCompletionCreateParams,
-    type ChatCompletionMessageParam,
-} from 'openai/resources/index.js';
-
-
 import { ENV } from '../enums/env.enum';
 
 
@@ -42,29 +36,27 @@ class OpenAI {
         return this.parseCompletionResponse(text as string);
     }
 
-    // public async createImage(
-    //     prompt: string,
-    //     size: ValueOf<typeof ImageSize> = ImageSize.SMALL,
-    // ): Promise<string> {
-    //     const [image] = await this.createImages(prompt, 1, size);
-    //
-    //     return image ?? '';
-    // }
-    //
-    // public async createImages(
-    //     prompt: string,
-    //     number: number,
-    //     size: ValueOf<typeof ImageSize> = ImageSize.SMALL,
-    // ): Promise<string[]> {
-    //     const { data } = await this.openAIApi.createImage({
-    //         prompt,
-    //         n: number,
-    //         size: imageSizeToResolutionMap[size],
-    //         response_format: 'b64_json',
-    //     });
-    //
-    //     return data.data.map((item) => item.b64_json ?? '');
-    // }
+    public async createImage(
+        prompt: string,
+    ): Promise<string> {
+        const [image] = await this.createImages(prompt, 1);
+
+        return image ?? '';
+    }
+
+    public async createImages(
+        prompt: string,
+        number: number,
+    ): Promise<string[]> {
+        const { data } = await this.openAIApi.images.generate({
+            prompt,
+            n: number,
+            size: '512x512',
+            response_format: 'b64_json',
+        });
+
+        return data.map((item) => item.b64_json ?? '');
+    }
 
     private parseCompletionResponse(response: string): Record<string, string> {
         const result: Record<string, string> = {};

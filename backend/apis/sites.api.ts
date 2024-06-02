@@ -17,8 +17,10 @@ async function sitesRoutes(fastify: FastifyInstance): Promise<void> {
         const site = await sitesService.addSite(request.body);
         reply.send(site);
     });
-    fastify.get('/sites', async (_, reply) => {
-        const sites = await sitesService.getSites();
+    fastify.post('/sitesByUserId', async (request, reply) => {
+        const body = request.body as { userId: string};
+        console.log('here', body)
+        const sites = await sitesService.getSites(body.userId);
         reply.send(sites);
     })
 }

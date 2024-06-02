@@ -9,6 +9,7 @@ import {
     ModalOverlay, Select
 } from "@chakra-ui/react";
 import {Field, FieldInputProps, Form, Formik, FormikHelpers, FormikProps} from "formik";
+import {useAppSelector} from "../hooks/hooks.ts";
 
 type Props = {
     isOpen: boolean;
@@ -19,6 +20,8 @@ const CreateSiteModal: React.FC<Props> = ({
                                             isOpen,
                                             handleClose
                                           }) => {
+
+    const user = useAppSelector(user=>user.user.currentUser);
     return (
         <Modal isOpen={isOpen} onClose={handleClose}>
             <ModalOverlay />
@@ -30,13 +33,18 @@ const CreateSiteModal: React.FC<Props> = ({
                         initialValues={{ name: '', toneOfVoice: 'Official', industry: '', targetAudience: 'Kids' }}
                         onSubmit={async (values: { name: string, toneOfVoice: string, industry: string, targetAudience: string }, actions: FormikHelpers<{ name: string, toneOfVoice: string, industry: string, targetAudience: string }>) => {
                             console.log(values);
-                            await fetch('http://localhost:3000/sites', {
+                            const result = await fetch('http://localhost:3000/sites', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
                                 },
-                                body: JSON.stringify(values), // Correctly serialize the body to JSON
+                                body: JSON.stringify({
+                                    ...values,
+                                    userId: user.id
+                                }), // Correctly serialize the body to JSON
                             });
+                            const site = await result.json();
+                            window.location.href = `/${site.id}`;
                             actions.setSubmitting(false); // Stop the loading indicator
                         }}
                     >

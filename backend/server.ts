@@ -4,12 +4,14 @@ import knex, { Knex } from 'knex';
 import knexConfig from './knexfile';
 import {Model} from "objection";
 import {sitesRoutes} from "./apis/sites.api";
+import {authRoutes} from "./apis/auth.api";
 
 
 const server = fastify();
 
 server.register(sectionsRoutes);
 server.register(sitesRoutes);
+server.register(authRoutes);
 
 const knexInstance: Knex = knex(knexConfig);
 

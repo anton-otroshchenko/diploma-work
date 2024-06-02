@@ -16,13 +16,14 @@ class SitesService {
     async getById(id: string){
         return this.sitesRepository.getById(id);
     }
-    async getSites() {
-        return this.sitesRepository.getSites();
+    async getSites(userId: string) {
+        return this.sitesRepository.getSites(userId);
     }
 
     async addSite(data:any){
         const site = await this.sitesRepository.addSite({
             name: data.name,
+            userId: data.userId,
         });
         console.log(site);
 

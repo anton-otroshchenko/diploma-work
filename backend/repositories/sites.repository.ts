@@ -11,8 +11,8 @@ class SitesRepository {
         return this.model.query().findById(id);
     }
 
-    async getSites() {
-        return this.model.query();
+    async getSites(userId: string) {
+        return this.model.query().where({userId}).execute();
     }
 
     async addSite(data:any){

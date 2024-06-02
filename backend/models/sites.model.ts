@@ -6,6 +6,7 @@ class Sites extends Model {
     createdAt!: string;
     updatedAt!: string;
     sections!: Sections[];
+    userId!: string;
 
     static get tableName() {
         return 'sites';

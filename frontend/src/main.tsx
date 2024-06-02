@@ -8,6 +8,8 @@ import { store } from './store/store.ts'
 import { Provider } from 'react-redux'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import {Site} from "./components/Site.tsx";
+import SignUp from "./components/Sign-up.tsx";
+import SignIn from "./components/Sign-in.tsx";
 
 const theme = extendTheme({
     config: {
@@ -24,6 +26,14 @@ const router = createBrowserRouter([
     {
         path: '/:siteId',
         element: <Site/>
+    },
+    {
+        path: '/sign-up',
+        element: <SignUp/>
+    },
+    {
+        path: '/sign-in',
+        element: <SignIn/>
     }
 ])
 
