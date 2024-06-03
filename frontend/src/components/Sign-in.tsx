@@ -25,10 +25,6 @@ function SignInForm() {
         onSubmit: async (values) => {
             console.log(values)
             void dispatch(signIn(values));
-            // formik.handleReset({
-            //     email: '',
-            //     password: ''
-            // })
         },
         validationSchema: Yup.object({
             email: Yup.string().required('Email Address cannot be empty'),

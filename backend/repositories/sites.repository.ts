@@ -6,7 +6,6 @@ class SitesRepository {
         this.model = model;
     }
 
-
     async getById(id: string) {
         return this.model.query().findById(id);
     }

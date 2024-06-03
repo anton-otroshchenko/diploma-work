@@ -93,8 +93,6 @@ class SectionService {
 
         const image = await openAI.createImage(content['imageDescription']);
 
-        console.log(image)
-
         const picture = await file.upload({file: image});
 
         return {
