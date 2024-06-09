@@ -24,9 +24,6 @@ class SectionService {
     }
 
     async addSection(data:any){
-
-        // console.log(data);
-
         const content = await this.createSectionContent(data.prompt, data.type);
 
         let section;
@@ -169,10 +166,6 @@ class SectionService {
             title: 'What people say',
             cards,
         };
-    }
-
-    async removeSection(id:string){
-        return this.sectionsRepository.removeSection(id);
     }
 }
 

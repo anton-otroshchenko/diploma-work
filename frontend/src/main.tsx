@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from "react-dom/client";
-import { App } from './App.tsx';
+import { App as Sites } from './App.tsx';
 import './assets/css/styles.scss';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 
@@ -10,6 +10,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import {Site} from "./components/Site.tsx";
 import SignUp from "./components/Sign-up.tsx";
 import SignIn from "./components/Sign-in.tsx";
+import { ToastContainer } from 'react-toastify';
 
 const theme = extendTheme({
     config: {
@@ -21,7 +22,7 @@ const theme = extendTheme({
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <App/>
+        element: <Sites/>
     },
     {
         path: '/:siteId',
@@ -44,6 +45,7 @@ root.render(
             <Provider store={store}>
                 <ChakraProvider theme={theme}>
                     <RouterProvider router={router}/>
+                    <ToastContainer/>
                 </ChakraProvider>
             </Provider>
     </React.StrictMode>

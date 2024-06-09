@@ -8,7 +8,7 @@ const signUp = createAsyncThunk(`${sliceName}/sign-up`, async (values: any) => {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(values), // Correctly serialize the body to JSON
+        body: JSON.stringify(values),
     });
 
     const parsedResult = await result.json();
